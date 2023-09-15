@@ -13,15 +13,11 @@ use Munus\Exception\NoSuchElementException;
  */
 final class CompositeIterator extends Iterator
 {
-    /**
-     * @var ArrayIterator<Iterator<T>>
-     */
-    private $iterators;
+    /**  @var ArrayIterator<Iterator<T>> */
+    private ArrayIterator $iterators;
 
-    /**
-     * @var Iterator<T>
-     */
-    private $current;
+    /** @var Iterator<T> */
+    private mixed $current;
 
     /**
      * @param array<int, Iterator<T>> $iterators
@@ -62,7 +58,8 @@ final class CompositeIterator extends Iterator
     /**
      * @return T
      */
-    public function next()
+    #[\ReturnTypeWillChange]
+    public function next(): mixed
     {
         if (!$this->hasNext()) {
             throw new NoSuchElementException();
@@ -71,13 +68,13 @@ final class CompositeIterator extends Iterator
         return $this->current->next();
     }
 
-    public function rewind()
+    public function rewind(): void
     {
         $this->iterators->rewind();
         $this->current = $this->iterators->current();
     }
 
-    public function current()
+    public function current(): mixed
     {
         return $this->current->current();
     }

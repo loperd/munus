@@ -39,7 +39,8 @@ final class SingletonIterator extends Iterator
     /**
      * @return T
      */
-    public function next()
+    #[\ReturnTypeWillChange]
+    public function next(): mixed
     {
         if (!$this->hasNext()) {
             throw new NoSuchElementException();
@@ -49,7 +50,7 @@ final class SingletonIterator extends Iterator
         return $this->element;
     }
 
-    public function current()
+    public function current(): mixed
     {
         if ($this->hasNext === true) {
             return $this->element;

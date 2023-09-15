@@ -26,7 +26,8 @@ final class EmptyIterator extends Iterator
     /**
      * @return void
      */
-    public function next()
+    #[\ReturnTypeWillChange]
+    public function next(): mixed
     {
         throw new NoSuchElementException();
     }
